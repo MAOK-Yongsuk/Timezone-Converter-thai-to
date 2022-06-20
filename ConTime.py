@@ -12,9 +12,9 @@ layout = [
 		sg.Combo(['TH to US','TH to CN','TH to JP','TH to UK','TH to AU']
 					,default_value='TH to US',size=(15, 1),key = '-UNITS-'),
 		sg.Button('Convert',size=(10, 1),font=('Courier 12'),key = '-CONVERT-')
-	],
+	],[sg.Text('')],
 	[sg.Text('Output:',font=('Courier 15'))],
-	[sg.Text('---',font=('Courier 15'),text_color='Yellow', key = '-OUTPUT-')]
+	[sg.Text('---',font=('Courier 15'), key = '-OUTPUT-')]
 ]
 
 
@@ -41,23 +41,23 @@ while True:
 			match values['-UNITS-']:
 				case 'TH to US':
 					output = convert_datetime_timezone(input_time,'America/New_York')
-					output_string = f"TH to US ---> {output}"
+					output_string = f" TH to US ---> {output}"
 				case 'TH to CN':
 					output = convert_datetime_timezone(input_time,'Asia/Shanghai')
-					output_string = f"TH to CN ---> {output}"
+					output_string = f" TH to CN ---> {output}"
 				case 'TH to UK':
 					output = convert_datetime_timezone(input_time,'Europe/London')
-					output_string = f"TH to UK ---> {output}"
+					output_string = f" TH to UK ---> {output}"
 				case 'TH to JP':
 					output = convert_datetime_timezone(input_time,'Asia/Tokyo')
-					output_string = f"TH to JP ---> {output}"
+					output_string = f" TH to JP ---> {output}"
 				case 'TH to AU':
 					output = convert_datetime_timezone(input_time,'Australia/Melbourne')
-					output_string = f"TH to AU ---> {output}"
-			window['-OUTPUT-'].update(output_string)
+					output_string = f" TH to AU ---> {output}"
+			window['-OUTPUT-'].update(output_string,text_color='Yellow')
 
 		except ValueError:
-			window['-OUTPUT-'].update('::Timezone incorrect, Try again',text_color='Red')
+			window['-OUTPUT-'].update('  Timezone incorrect, Try again',text_color='Red')
 						
 		
 window.close()		
