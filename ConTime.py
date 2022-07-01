@@ -7,18 +7,27 @@ layout = [
 	[sg.Text('-ConverterTimeZone_V.01-',font=('Any 20'))],[sg.Text('')],
 	[sg.Text('(Ex. YYYY-MM-DD HH:MM)',font=('Courier 11'))],
 	[		
-		sg.Input(key = '-INPUT1-',size=(11, 1),font=('Courier 15')),
-		sg.Input(key = '-INPUT2-',size=(6, 1),font=('Courier 15')),
+		sg.Input(key = '-INPUT1-',size=(4, 1),font=('Courier 15')),
+		sg.Text('-',font=('Courier 10')),
+		sg.Input(key = '-INPUT2-',size=(2, 1),font=('Courier 15')),
+		sg.Text('-',font=('Courier 10')),
+		sg.Input(key = '-INPUT3-',size=(2, 1),font=('Courier 15')),
+		sg.Text(' ',font=('Courier 10')),
+		sg.Input(key = '-INPUT4-',size=(2, 1),font=('Courier 15')),
+		sg.Text(':',font=('Courier 10')),
+		sg.Input(key = '-INPUT5-',size=(2, 1),font=('Courier 15')),sg.Text(' '),
+
 		sg.Combo(['TH to US','TH to CN','TH to JP','TH to UK','TH to AU']
 					,default_value='TH to US',size=(15, 1),key = '-UNITS-'),
 		sg.Button('Convert',size=(10, 1),font=('Courier 12'),key = '-CONVERT-')
 	],[sg.Text('')],
+	
 	[sg.Text('Output:',font=('Courier 15'))],
 	[sg.Text('---',font=('Courier 15'), key = '-OUTPUT-')]
 ]
 
 
-window = sg.Window('TimezoneConverter_V.01',layout,size=(600, 300))
+window = sg.Window('TimezoneConverter_V.01',layout,size=(650, 300))
 
 def convert_datetime_timezone(dt,tz2):
     tz1 = pytz.timezone('Asia/Bangkok')
@@ -36,7 +45,9 @@ while True:
 		break
 
 	if event == '-CONVERT-':
-		input_time = values['-INPUT1-'] +' '+ values['-INPUT2-']
+		input_time = values['-INPUT1-'] +'-'+ values['-INPUT2-']+'-'+ values['-INPUT3-']+' '+values['-INPUT4-']+':'+ values['-INPUT5-']
+		#print(input_time)
+
 		try:
 			match values['-UNITS-']:
 				case 'TH to US':
